@@ -1,0 +1,41 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>RCE Engine</title>
+    <script src="/socket.io/socket.io.js"></script>
+</head>
+<body style="font-family: sans-serif; padding: 20px;">
+
+    <h2>🚀 Remote Code Execution Engine</h2>
+    
+    <textarea id="codeInput" rows="5" cols="50" placeholder="Type Python code here...">print("Hello from WebSockets!")</textarea>
+    <br><br>
+    <button onclick="runCode()" style="padding: 10px 20px; cursor: pointer;">Run Code</button>
+
+    <h3>Output:</h3>
+    <pre id="outputBox" style="background: #f4f4f4; padding: 10px; border: 1px solid #ddd;">Waiting...</pre>
+
+    <script>
+        const socket = io(); // Server se connect karo
+
+        // 1. Jab Server bole "Kaam Ho Gaya"
+        socket.on('job-completed', (data) => {
+            console.log("Result received:", data);
+            document.getElementById('outputBox').innerText = data.output;
+        });
+
+        // 2. Code bhejne ka function
+        async function runCode() {
+            const code = document.getElementById('codeInput').value;
+            document.getElementById('outputBox').innerText = "Running in Docker...";
+            
+            // API call karo
+            await fetch('/run', {
+                method: 'POST',
+                headers: { 'Content-Type': 'application/json' },
+                body: JSON.stringify({ code })
+            });
+        }
+    </script>
+</body>
+</html>

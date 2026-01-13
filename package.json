@@ -1,0 +1,21 @@
+{
+  "name": "rce-engine",
+  "version": "1.0.0",
+  "description": "",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "dependencies": {
+    "body-parser": "^2.2.2",
+    "bullmq": "^5.66.5",
+    "dockerode": "^4.0.9",
+    "express": "^5.2.1",
+    "http": "^0.0.1-security",
+    "ioredis": "^5.9.1",
+    "socket.io": "^4.8.3"
+  }
+}
