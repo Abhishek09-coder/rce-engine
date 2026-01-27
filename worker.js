@@ -28,7 +28,13 @@ const worker = new Worker('code-execution-queue', async (job) => {
         container = await docker.createContainer({
             Image: image,
             Cmd: cmd,
-            Tty: false
+            Tty: false, 
+
+            HostConfig: {
+                Memory: 512 * 1024 * 1024,     // Limit RAM to 512MB
+                MemorySwap: 512 * 1024 * 1024, // Swap limited
+                NanoCpus: 1000000000,          // Limit CPU to 1 Core (10^9 nano-cpus)
+            }
         });
 
         // 2. Stream Attach
